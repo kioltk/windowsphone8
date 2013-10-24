@@ -1,0 +1,91 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="wp8.TourPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="True"
+    Loaded="TourLoaded">
+    <phone:PhoneApplicationPage.Resources>
+
+
+        
+        <Style TargetType="Button"  x:Name="Get">
+
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Ellipse x:Name="Background" Fill="#FFE85744" />
+                           <ContentPresenter
+                              x:Name="contentPresenter"
+                              Content="{TemplateBinding Content}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              Margin="{TemplateBinding Padding}"
+                                />
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver"/>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0" Storyboard.TargetName="Background" Storyboard.TargetProperty="(Ellipse.Fill).(SolidColorBrush.Color)" To="#FFCC0000"/>
+
+                                        </Storyboard>
+                                    </VisualState>
+
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="FocusStates"/>
+                            </VisualStateManager.VisualStateGroups>
+
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            
+        </Style>
+
+    </phone:PhoneApplicationPage.Resources>
+    <Grid x:Name="LayoutRoot" >
+        <phone:Panorama Name="TourPanorama"  Title="Idodil Agency">
+              <phone:Panorama.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding header}"/>
+                </DataTemplate>
+            </phone:Panorama.HeaderTemplate>
+
+            <phone:Panorama.ItemTemplate>
+                <DataTemplate>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70*"/>
+                        <RowDefinition Height="25*"/>
+                    </Grid.RowDefinitions>
+                    <!---->
+                    <Button Click="GetInviteButtonClick" Visibility="{Binding Path=buttonVisibility}" Margin="110,15,0,0" Width="325" Height="325" Style="{StaticResource ResourceKey=Get}" Grid.Row="0" Grid.Column="1" >
+                        <TextBlock TextAlignment="Center">GET<LineBreak/>INVITE</TextBlock>
+                    </Button>
+                    <Image  Source="{Binding  Path=image}" Grid.Row="0" Grid.Column="1" Margin="0,0,-210,0" />
+                    <!--{Binding Path=description}-->
+                    <TextBlock Foreground="#FFE85744" Margin="50,0,15,0" FontSize="26" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Row="1" Text="{Binding Path=description}" Grid.ColumnSpan="2"/>
+                </Grid>
+                </DataTemplate>
+            </phone:Panorama.ItemTemplate>
+
+        </phone:Panorama>
+    </Grid>
+
+</phone:PhoneApplicationPage>
